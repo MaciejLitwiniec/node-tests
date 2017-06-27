@@ -17,6 +17,15 @@ it('should add 2 numbers', () => {
   // }
 });
 
+//in order to properly test asynchronus function we need to provide 'done' in callback function
+//this will tell Mocha that test needs more time (asynchronus function)
+it('should async add 2 numbers', (done) => {
+  utils.asyncAdd(4, 3, (sum) => {
+    expect(sum).toBe(7).toBeA('number');
+    done();
+  });
+});
+
 it('should be squared', () => {
   var res = utils.squared(2);
 
@@ -24,6 +33,13 @@ it('should be squared', () => {
   // if (res !== 4){
   //   throw new Error(`Expected 4, but got ${res}`);
   // }
+});
+
+it('should be asynch squared', (done) => {
+  utils.asyncSquared(5, (res) => {
+    expect(res).toBe(25).toBeA('number');
+    done();
+  });
 });
 
 
@@ -36,17 +52,14 @@ it('should be squared', () => {
 //check if what we are passing is an object
 
 it('should set firstname and lastname', () => {
-  var user = {
-    age: '29',
-    location: 'Warsaw'
-  };
+  var user = {age: '29', location: 'Warsaw'};
 
   var res = utils.setName(user, 'Maciej Litwiniec');
   //expect(user).toEqual(res);
   expect(res).toInclude({
     firstName: 'Maciej',
     lastName: 'Litwiniec'
-  })
+  });
 });
 
 // it('should expect some values', () => {
