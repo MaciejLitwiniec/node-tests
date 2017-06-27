@@ -1,46 +1,52 @@
+//tests- behaviour driven development
+
 const expect = require('expect');
 
 const utils = require('./utils');
 
-//tests- behaviour driven development
+describe('Utils', () => {
 
-//test case
-//first argument in function tells what test is doing
-//second argument in function tells
-it('should add 2 numbers', () => {
-  var res = utils.add(33, 11);
+  describe('#add', () => {
+    //test case
+    //first argument in function tells what test is doing
+    //second argument in function tells
+    it('should add 2 numbers', () => {
+      var res = utils.add(33, 11);
 
-  expect(res).toBe(44).toBeA('number');
-  // replaced with Expect assertion library
-  // if (res !== 44){
-  //     throw new Error(`Expected 44, but got ${res}`);
-  // }
-});
+      expect(res).toBe(44).toBeA('number');
+      // replaced with Expect assertion library
+      // if (res !== 44){
+      //     throw new Error(`Expected 44, but got ${res}`);
+      // }
+    });
+  });
 
-//in order to properly test asynchronus function we need to provide 'done' in callback function
-//this will tell Mocha that test needs more time (asynchronus function)
-it('should async add 2 numbers', (done) => {
-  utils.asyncAdd(4, 3, (sum) => {
-    expect(sum).toBe(7).toBeA('number');
-    done();
+  //in order to properly test asynchronus function we need to provide 'done' in callback function
+  //this will tell Mocha that test needs more time (asynchronus function)
+  it('should async add 2 numbers', (done) => {
+    utils.asyncAdd(4, 3, (sum) => {
+      expect(sum).toBe(7).toBeA('number');
+      done();
+    });
+  });
+
+  it('should be squared', () => {
+    var res = utils.squared(2);
+
+    expect(res).toBe(4).toBeA('number');
+    // if (res !== 4){
+    //   throw new Error(`Expected 4, but got ${res}`);
+    // }
+  });
+
+  it('should be asynch squared', (done) => {
+    utils.asyncSquared(5, (res) => {
+      expect(res).toBe(25).toBeA('number');
+      done();
+    });
   });
 });
 
-it('should be squared', () => {
-  var res = utils.squared(2);
-
-  expect(res).toBe(4).toBeA('number');
-  // if (res !== 4){
-  //   throw new Error(`Expected 4, but got ${res}`);
-  // }
-});
-
-it('should be asynch squared', (done) => {
-  utils.asyncSquared(5, (res) => {
-    expect(res).toBe(25).toBeA('number');
-    done();
-  });
-});
 
 
 //should verify first name and last name are not empty
